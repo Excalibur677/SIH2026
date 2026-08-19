@@ -34,20 +34,44 @@ const PrivacyPage = () => {
           </StatusBadge>,
         ]}
         right={
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <span style={{ fontSize: 12, color: 'var(--text-muted)' }}>Scenario</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            <span style={{ fontSize: 12, color: 'var(--text-muted)', fontWeight: 500 }}>Scenario</span>
             <select
               value={scenarioId}
               onChange={(e) => select(e.target.value)}
               style={{
-                padding: '8px 12px',
-                borderRadius: 10,
-                background: 'var(--bg-surface)',
+                padding: '9px 14px 9px 12px',
+                borderRadius: 12,
+                background: 'linear-gradient(145deg, #FFFFFF, #F8FAFC)',
                 color: 'var(--text-primary)',
                 border: '1px solid var(--border-strong)',
                 fontSize: 13,
                 fontWeight: 600,
                 cursor: 'pointer',
+                boxShadow: 'var(--shadow-sm)',
+                transition: 'all 0.25s ease',
+                outline: 'none',
+                appearance: 'none',
+                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E")`,
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'right 12px center',
+                paddingRight: '36px',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = 'rgba(13,148,136,0.35)';
+                e.currentTarget.style.boxShadow = 'var(--shadow-md)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = 'var(--border-strong)';
+                e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
+              }}
+              onFocus={(e) => {
+                e.currentTarget.style.borderColor = 'rgba(13,148,136,0.5)';
+                e.currentTarget.style.boxShadow = '0 0 0 3px rgba(13,148,136,0.12)';
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = 'var(--border-strong)';
+                e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
               }}
             >
               {scenarios.map((s) => (
@@ -60,7 +84,7 @@ const PrivacyPage = () => {
         }
       />
 
-      <div style={{ padding: '4px 28px 18px' }}>
+      <div style={{ padding: '6px 32px 20px' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 14 }}>
           <MetricCard
             label="Clip norm C"

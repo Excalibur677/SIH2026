@@ -1,12 +1,40 @@
 const StatusBadge = ({ tone = 'neutral', children }) => {
   const tones = {
-    online: { bg: 'rgba(16,185,129,0.12)', fg: 'var(--accent-green)', border: 'rgba(16,185,129,0.3)' },
-    neutral: { bg: 'var(--bg-elevated)', fg: 'var(--text-secondary)', border: 'var(--border-subtle)' },
-    info: { bg: 'rgba(37,99,235,0.12)', fg: 'var(--accent-blue)', border: 'rgba(37,99,235,0.3)' },
-    warn: { bg: 'rgba(245,158,11,0.12)', fg: 'var(--accent-amber)', border: 'rgba(245,158,11,0.3)' },
-    danger: { bg: 'rgba(239,68,68,0.12)', fg: 'var(--accent-red)', border: 'rgba(239,68,68,0.3)' },
-    privacy: { bg: 'rgba(14,165,160,0.12)', fg: 'var(--accent-teal)', border: 'rgba(14,165,160,0.3)' },
-    critical: { bg: 'rgba(139,44,110,0.16)', fg: '#F0ABCC', border: 'rgba(139,44,110,0.4)' },
+    online: {
+      bg: 'linear-gradient(135deg, rgba(16,185,129,0.12), rgba(16,185,129,0.06))',
+      fg: '#059669',
+      border: 'rgba(16,185,129,0.28)',
+    },
+    neutral: {
+      bg: 'var(--bg-elevated)',
+      fg: 'var(--text-secondary)',
+      border: 'var(--border-subtle)',
+    },
+    info: {
+      bg: 'linear-gradient(135deg, rgba(59,130,246,0.12), rgba(59,130,246,0.06))',
+      fg: '#2563EB',
+      border: 'rgba(59,130,246,0.28)',
+    },
+    warn: {
+      bg: 'linear-gradient(135deg, rgba(245,158,11,0.12), rgba(245,158,11,0.06))',
+      fg: '#D97706',
+      border: 'rgba(245,158,11,0.28)',
+    },
+    danger: {
+      bg: 'linear-gradient(135deg, rgba(239,68,68,0.12), rgba(239,68,68,0.06))',
+      fg: '#DC2626',
+      border: 'rgba(239,68,68,0.28)',
+    },
+    privacy: {
+      bg: 'linear-gradient(135deg, rgba(13,148,136,0.12), rgba(13,148,136,0.06))',
+      fg: '#0D9488',
+      border: 'rgba(13,148,136,0.28)',
+    },
+    critical: {
+      bg: 'linear-gradient(135deg, rgba(139,44,110,0.16), rgba(139,44,110,0.08))',
+      fg: '#9D174D',
+      border: 'rgba(139,44,110,0.35)',
+    },
   };
   const t = tones[tone] || tones.neutral;
   return (
@@ -15,7 +43,7 @@ const StatusBadge = ({ tone = 'neutral', children }) => {
         display: 'inline-flex',
         alignItems: 'center',
         gap: 6,
-        padding: '3px 9px',
+        padding: '4px 10px',
         borderRadius: 999,
         fontSize: 11.5,
         fontWeight: 600,
@@ -23,6 +51,8 @@ const StatusBadge = ({ tone = 'neutral', children }) => {
         background: t.bg,
         color: t.fg,
         border: `1px solid ${t.border}`,
+        transition: 'all 0.2s ease',
+        whiteSpace: 'nowrap',
       }}
     >
       <span
@@ -32,7 +62,7 @@ const StatusBadge = ({ tone = 'neutral', children }) => {
           height: 5,
           borderRadius: 999,
           background: t.fg,
-          boxShadow: `0 0 0 3px ${t.bg}`,
+          boxShadow: `0 0 0 3px ${t.border}`,
         }}
       />
       {children}

@@ -5,33 +5,12 @@ import DemoDataBanner from './DemoDataBanner.jsx';
 
 const AppShell = () => {
   return (
-    <div
-      style={{
-        display: 'flex',
-        height: '100vh',
-        width: '100vw',
-        overflow: 'hidden',
-      }}
-    >
+    <div className="app-shell">
       <Sidebar />
-      <div
-        style={{
-          flex: 1,
-          minWidth: 0,
-          display: 'flex',
-          flexDirection: 'column',
-          height: '100vh',
-        }}
-      >
+      <div className="app-content">
         <DemoDataBanner />
         <TopBar />
-        <main
-          style={{
-            flex: 1,
-            minHeight: 0,
-            overflowY: 'auto',
-          }}
-        >
+        <main className="app-main">
           <Outlet />
         </main>
       </div>

@@ -14,10 +14,6 @@ const FederationPage = () => {
   const playback = useFederationRound({ autoplay: false });
   const { round } = playback;
   const totalSamples = (round?.bankUpdates || []).reduce((s, u) => s + (u?.samples || 0), 0);
-  const avgLocalF1 = (round?.bankUpdates || []).length
-    ? (round.bankUpdates.reduce((s, u) => s + Number(u?.localF1 || 0), 0) /
-        round.bankUpdates.length)
-    : 0;
 
   return (
     <div style={{ paddingBottom: 40 }}>
@@ -37,16 +33,33 @@ const FederationPage = () => {
           <button
             onClick={playback.toggle}
             style={{
-              padding: '10px 16px',
-              borderRadius: 10,
+              padding: '11px 18px',
+              borderRadius: 12,
               background: playback.playing
-                ? 'var(--accent-amber)'
-                : 'linear-gradient(135deg, #0EA5A0, #2563EB)',
-              color: playback.playing ? '#201600' : '#052223',
+                ? 'linear-gradient(135deg, #F59E0B, #FBBF24)'
+                : 'linear-gradient(135deg, #0D9488 0%, #3B82F6 100%)',
+              color: playback.playing ? '#422006' : '#FFFFFF',
               fontWeight: 700,
               fontSize: 13,
               cursor: 'pointer',
               border: 'none',
+              boxShadow: playback.playing
+                ? '0 8px 20px -8px rgba(245,158,11,0.6)'
+                : '0 10px 28px -10px rgba(13,148,136,0.55), 0 4px 12px -4px rgba(59,130,246,0.35)',
+              transition: 'all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1)',
+              letterSpacing: 0.01,
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-1.5px)';
+              e.currentTarget.style.boxShadow = playback.playing
+                ? '0 10px 24px -8px rgba(245,158,11,0.7)'
+                : '0 14px 32px -10px rgba(13,148,136,0.6), 0 6px 16px -4px rgba(59,130,246,0.4)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = playback.playing
+                ? '0 8px 20px -8px rgba(245,158,11,0.6)'
+                : '0 10px 28px -10px rgba(13,148,136,0.55), 0 4px 12px -4px rgba(59,130,246,0.35)';
             }}
           >
             {playback.playing ? '❚❚ Pause playback' : '▶ Play Round'}
@@ -54,15 +67,15 @@ const FederationPage = () => {
         }
       />
 
-      <div style={{ padding: '4px 28px 18px' }}>
+      <div style={{ padding: '6px 32px 20px' }}>
         <RoundProgress {...playback} />
       </div>
 
-      <div style={{ padding: '4px 28px 10px' }}>
+      <div style={{ padding: '6px 32px 12px' }}>
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
+            gridTemplateColumns: 'repeat(3, 1fr)',
             gap: 14,
           }}
         >
@@ -107,14 +120,6 @@ const FederationPage = () => {
             tone="blue"
             icon="📦"
             hint="Local data never leaves the bank perimeter"
-          />
-          <MetricCard
-            label="Avg bank-level F1 (demo)"
-            value={avgLocalF1}
-            valueType="percent"
-            tone="pink"
-            icon="🎯"
-            hint={`Global Macro F1 ${formatPercent(round?.globalMacroF1)}`}
           />
         </div>
       </div>
